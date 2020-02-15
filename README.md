@@ -68,11 +68,11 @@ class SteamLoginController extends AbstractSteamLoginController
     }
 }
 ```
-
 ---
 
 ## Credits
 
 Thanks to these libs which led me to make this
+- https://github.com/kanalumaddela/laravel-steam-login (original author)
 - https://github.com/Ehesp/Steam-Login (Parts of code used and re-purposed for laravel)
-- https://github.com/invisnik/laravel-steam-auth (Getting me to create a laravel steam auth/login)
+- https://github.com/invisnik/laravel-steam-auth
