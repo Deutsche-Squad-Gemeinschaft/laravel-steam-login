@@ -142,7 +142,7 @@ class SteamUser extends Fluent
      *
      * @return string
      */
-    public function __toString(): string
+    public function __toString() : string
     {
         return $this->toJson();
     }
@@ -152,7 +152,7 @@ class SteamUser extends Fluent
      *
      * @return $this
      */
-    public function getUserInfo(): self
+    public function getUserInfo() : self
     {
         $this->userInfo();
 
@@ -162,7 +162,7 @@ class SteamUser extends Fluent
     /**
      * Retrieve a user's profile info from Steam via API or XML data.
      */
-    private function userInfo()
+    private function userInfo() : void
     {
         $this->response = $this->guzzle->get($this->profileDataUrl, ['connect_timeout' => config('steam-login.timeout')]);
         $body = $this->response->getBody()->getContents();
@@ -182,7 +182,7 @@ class SteamUser extends Fluent
         $this->attributes = array_merge($this->attributes, $data);
     }
 
-    protected static function parseApiProfileData($body): array
+    protected static function parseApiProfileData($body) : array
     {
         $json = @json_decode($body, true);
         $json = isset($json['response']['players'][0]) ? $json['response']['players'][0] : null;
@@ -210,7 +210,7 @@ class SteamUser extends Fluent
         ];
     }
 
-    protected static function parseXmlProfileData($body): array
+    protected static function parseXmlProfileData($body) : array
     {
         $xml = simplexml_load_string($body, 'SimpleXMLElement', LIBXML_NOCDATA);
 
@@ -242,7 +242,7 @@ class SteamUser extends Fluent
      *
      * @return Response
      */
-    public function getResponse(): Response
+    public function getResponse() : Response
     {
         return $this->response;
     }
