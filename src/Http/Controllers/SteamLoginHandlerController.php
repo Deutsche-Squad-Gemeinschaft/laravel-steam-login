@@ -10,10 +10,10 @@
  * @license   MIT
  */
 
-namespace kanalumaddela\LaravelSteamLogin\Http\Controllers;
+namespace skyraptor\LaravelSteamLogin\Http\Controllers;
 
 use Illuminate\Http\Request;
-use kanalumaddela\LaravelSteamLogin\SteamUser;
+use skyraptor\LaravelSteamLogin\SteamUser;
 
 /**
  * @deprecated

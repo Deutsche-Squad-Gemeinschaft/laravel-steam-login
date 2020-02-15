@@ -10,7 +10,7 @@
  * @license   MIT
  */
 
-namespace kanalumaddela\LaravelSteamLogin;
+namespace skyraptor\LaravelSteamLogin;
 
 use function config;
 use Exception;
@@ -27,7 +27,7 @@ use Illuminate\Http\Request;
 use function in_array;
 use InvalidArgumentException;
 use function is_numeric;
-use kanalumaddela\LaravelSteamLogin\Contracts\SteamLoginInterface;
+use skyraptor\LaravelSteamLogin\Contracts\SteamLoginInterface;
 use function parse_url;
 use const PHP_URL_HOST;
 use function preg_match;
@@ -246,7 +246,7 @@ class SteamLogin implements SteamLoginInterface
      *
      * @throws InvalidArgumentException
      *
-     *@return \kanalumaddela\LaravelSteamLogin\SteamLogin
+     *@return \skyraptor\LaravelSteamLogin\SteamLogin
      */
     public function setRedirectTo(string $redirectTo = null): self
     {
@@ -286,7 +286,7 @@ class SteamLogin implements SteamLoginInterface
      *
      * @param \GuzzleHttp\Client $guzzle
      *
-     * @return \kanalumaddela\LaravelSteamLogin\SteamLogin
+     * @return \skyraptor\LaravelSteamLogin\SteamLogin
      */
     public function setGuzzle(GuzzleClient $guzzle): self
     {
@@ -300,7 +300,7 @@ class SteamLogin implements SteamLoginInterface
      *
      * @param string $realm
      *
-     * @return \kanalumaddela\LaravelSteamLogin\SteamLogin
+     * @return \skyraptor\LaravelSteamLogin\SteamLogin
      */
     public function setRealm(?string $realm = null): self
     {
@@ -435,7 +435,7 @@ class SteamLogin implements SteamLoginInterface
      *
      * @param bool $info
      *
-     * @return \kanalumaddela\LaravelSteamLogin\SteamUser
+     * @return \skyraptor\LaravelSteamLogin\SteamUser
      */
     public function getSteamUser(bool $info = false): SteamUser
     {

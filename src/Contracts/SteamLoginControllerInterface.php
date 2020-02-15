@@ -10,11 +10,11 @@
  * @license   MIT
  */
 
-namespace kanalumaddela\LaravelSteamLogin\Contracts;
+namespace skyraptor\LaravelSteamLogin\Contracts;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use kanalumaddela\LaravelSteamLogin\SteamUser;
+use skyraptor\LaravelSteamLogin\SteamUser;
 
 interface SteamLoginControllerInterface
 {
@@ -36,7 +36,7 @@ interface SteamLoginControllerInterface
      * Called when the request is successfully authenticated.
      *
      * @param \Illuminate\Http\Request                   $request
-     * @param \kanalumaddela\LaravelSteamLogin\SteamUser $steamUser
+     * @param \skyraptor\LaravelSteamLogin\SteamUser $steamUser
      *
      * @return mixed|void
      */

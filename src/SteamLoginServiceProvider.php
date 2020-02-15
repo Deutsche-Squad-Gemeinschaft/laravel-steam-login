@@ -10,7 +10,7 @@
  * @license   MIT
  */
 
-namespace kanalumaddela\LaravelSteamLogin;
+namespace skyraptor\LaravelSteamLogin;
 
 use function config_path;
 use function copy;

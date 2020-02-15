@@ -27,7 +27,7 @@ Make sure you have made/performed your migrations along with updating your `User
 ```
 composer require kanalumaddela/laravel-steam-login
 
-php artisan vendor:publish --force --provider kanalumaddela\LaravelSteamLogin\SteamLoginServiceProvider
+php artisan vendor:publish --force --provider skyraptor\LaravelSteamLogin\SteamLoginServiceProvider
 ```
 
 2. Add routes
@@ -35,7 +35,7 @@ php artisan vendor:publish --force --provider kanalumaddela\LaravelSteamLogin\St
 `routes/web.php`
 ```php
 use App\Http\Controllers\Auth\SteamLoginController;
-use kanalumaddela\LaravelSteamLogin\Facades\SteamLogin;
+use skyraptor\LaravelSteamLogin\Facades\SteamLogin;
 
 //...
 
@@ -53,8 +53,8 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use kanalumaddela\LaravelSteamLogin\Http\Controllers\AbstractSteamLoginController;
-use kanalumaddela\LaravelSteamLogin\SteamUser;
+use skyraptor\LaravelSteamLogin\Http\Controllers\AbstractSteamLoginController;
+use skyraptor\LaravelSteamLogin\SteamUser;
 
 class SteamLoginController extends AbstractSteamLoginController
 {

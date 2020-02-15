@@ -10,12 +10,12 @@
  * @license   MIT
  */
 
-namespace kanalumaddela\LaravelSteamLogin\Interfaces;
+namespace skyraptor\LaravelSteamLogin\Interfaces;
 
 use Illuminate\Http\RedirectResponse;
 
 /**
- * Use \kanalumaddela\LaravelSteamLogin\Contracts\SteamLoginInterface.
+ * Use \skyraptor\LaravelSteamLogin\Contracts\SteamLoginInterface.
  *
  * @deprecated
  */

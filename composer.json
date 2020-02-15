@@ -1,5 +1,5 @@
 {
-    "name": "kanalumaddela/laravel-steam-login",
+    "name": "skyraptor/laravel-steam-login",
     "description": "Steam Login package for Laravel 5.5+",
     "keywords": [
         "laravel",
@@ -30,21 +30,21 @@
     },
     "autoload": {
         "psr-4": {
-            "kanalumaddela\\LaravelSteamLogin\\": "src/"
+            "skyraptor\\LaravelSteamLogin\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "kanalumaddela\\LaravelSteamLogin\\Tests\\": "tests/"
+            "skyraptor\\LaravelSteamLogin\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "kanalumaddela\\LaravelSteamLogin\\SteamLoginServiceProvider"
+                "skyraptor\\LaravelSteamLogin\\SteamLoginServiceProvider"
             ],
             "aliases": {
-                "SteamLogin": "kanalumaddela\\LaravelSteamLogin\\Facades\\SteamLogin"
+                "SteamLogin": "skyraptor\\LaravelSteamLogin\\Facades\\SteamLogin"
             }
         }
     },

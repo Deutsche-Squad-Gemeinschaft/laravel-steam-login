@@ -10,12 +10,12 @@
  * @license   MIT
  */
 
-namespace kanalumaddela\LaravelSteamLogin\Http\Controllers;
+namespace skyraptor\LaravelSteamLogin\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use const JSON_PRETTY_PRINT;
-use kanalumaddela\LaravelSteamLogin\SteamUser;
+use skyraptor\LaravelSteamLogin\SteamUser;
 
 class SteamLoginController extends AbstractSteamLoginController
 {
@@ -23,7 +23,7 @@ class SteamLoginController extends AbstractSteamLoginController
      * Called when the request is successfully authenticated.
      *
      * @param \Illuminate\Http\Request                   $request
-     * @param \kanalumaddela\LaravelSteamLogin\SteamUser $steamUser
+     * @param \skyraptor\LaravelSteamLogin\SteamUser $steamUser
      *
      * @return mixed|void
      */

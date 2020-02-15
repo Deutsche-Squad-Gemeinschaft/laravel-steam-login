@@ -10,17 +10,17 @@
  * @license   MIT
  */
 
-namespace kanalumaddela\LaravelSteamLogin\Facades;
+namespace skyraptor\LaravelSteamLogin\Facades;
 
 use function array_replace_recursive;
 use Illuminate\Support\Facades\Facade;
-use kanalumaddela\LaravelSteamLogin\Http\Controllers\SteamLoginController;
+use skyraptor\LaravelSteamLogin\Http\Controllers\SteamLoginController;
 
 class SteamLogin extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \kanalumaddela\LaravelSteamLogin\SteamLogin::class;
+        return \skyraptor\LaravelSteamLogin\SteamLogin::class;
     }
 
     public static function routes(array $options = [])

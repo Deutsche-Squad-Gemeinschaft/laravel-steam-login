@@ -10,7 +10,7 @@
  * @license   MIT
  */
 
-namespace kanalumaddela\LaravelSteamLogin\Contracts;
+namespace skyraptor\LaravelSteamLogin\Contracts;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

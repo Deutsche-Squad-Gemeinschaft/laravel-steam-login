@@ -10,14 +10,14 @@
  * @license   MIT
  */
 
-namespace kanalumaddela\LaravelSteamLogin\Http\Controllers;
+namespace skyraptor\LaravelSteamLogin\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use kanalumaddela\LaravelSteamLogin\Contracts\SteamLoginControllerInterface;
-use kanalumaddela\LaravelSteamLogin\SteamLogin;
+use skyraptor\LaravelSteamLogin\Contracts\SteamLoginControllerInterface;
+use skyraptor\LaravelSteamLogin\SteamLogin;
 
 abstract class AbstractSteamLoginController extends Controller implements SteamLoginControllerInterface
 {
@@ -39,7 +39,7 @@ abstract class AbstractSteamLoginController extends Controller implements SteamL
      * AbstractSteamLoginController constructor.
      *
      * @param \Illuminate\Http\Request                    $request
-     * @param \kanalumaddela\LaravelSteamLogin\SteamLogin $steam
+     * @param \skyraptor\LaravelSteamLogin\SteamLogin $steam
      */
     public function __construct(Request $request, SteamLogin $steam)
     {
