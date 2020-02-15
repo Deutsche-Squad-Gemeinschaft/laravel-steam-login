@@ -1,43 +1,12 @@
 <?php
-/**
- * Laravel Steam Login.
- *
- * @link      https://www.maddela.org
- * @link      https://github.com/kanalumaddela/laravel-steam-login
- *
- * @author    kanalumaddela <git@maddela.org>
- * @copyright Copyright (c) 2018-2019 Maddela
- * @license   MIT
- */
 
 namespace skyraptor\LaravelSteamLogin;
 
-use function config;
-use Exception;
-use function explode;
-use const FILTER_VALIDATE_DOMAIN;
-use const FILTER_VALIDATE_URL;
-use function filter_var;
-use function get_class;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Psr7\Response;
-use function http_build_query;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use function in_array;
-use InvalidArgumentException;
-use function is_numeric;
 use skyraptor\LaravelSteamLogin\Contracts\SteamLoginInterface;
-use function parse_url;
-use const PHP_URL_HOST;
-use function preg_match;
-use function redirect;
-use function route;
-use function sprintf;
-use function str_replace;
-use function strpos;
-use function trigger_error;
-use function url;
 
 class SteamLogin implements SteamLoginInterface
 {
@@ -220,7 +189,7 @@ class SteamLogin implements SteamLoginInterface
         $this->realm = $this->getRealm();
 
         if (parse_url($this->realm, PHP_URL_HOST) !== parse_url($return, PHP_URL_HOST)) {
-            throw new InvalidArgumentException(sprintf('realm: `%s` and return_to: `%s` do not have matching hosts', $this->realm, $return));
+            throw new \InvalidArgumentException(sprintf('realm: `%s` and return_to: `%s` do not have matching hosts', $this->realm, $return));
         }
 
         $params['openid.realm'] = $this->realm;
@@ -257,7 +226,7 @@ class SteamLogin implements SteamLoginInterface
         if (in_array($redirectTo, [$this->loginRoute, $this->authRoute])) {
             $redirectTo = url('/');
         } elseif (!filter_var($redirectTo, FILTER_VALIDATE_URL)) {
-            throw new InvalidArgumentException('$redirectTo: `'.$redirectTo.'` is not a valid URL');
+            throw new \InvalidArgumentException('$redirectTo: `'.$redirectTo.'` is not a valid URL');
         }
 
         $this->redirectTo = $redirectTo;
@@ -313,7 +282,7 @@ class SteamLogin implements SteamLoginInterface
         $realm = (self::$isHttps ? 'https' : 'http').'://'.$host;
 
         if (!filter_var($realm, FILTER_VALIDATE_URL)) {
-            throw new InvalidArgumentException('$realm: `'.$realm.'` is not a valid URL.');
+            throw new \InvalidArgumentException('$realm: `'.$realm.'` is not a valid URL.');
         }
 
         $this->realm = $realm;

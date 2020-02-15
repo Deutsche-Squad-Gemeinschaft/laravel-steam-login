@@ -2,19 +2,10 @@
 
 namespace skyraptor\LaravelSteamLogin;
 
-use function array_merge;
-use function config;
+use Illuminate\Support\Fluent;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Psr7\Response;
-use Illuminate\Support\Fluent;
-use function in_array;
-use function json_decode;
-use const JSON_ERROR_NONE;
-use function json_last_error;
-use function simplexml_load_string;
-use function sprintf;
 use SteamID;
-use function ucfirst;
 
 /**
  * @property string steamId
@@ -52,7 +43,7 @@ class SteamUser extends Fluent
     /**
      * personaStates.
      */
-    protected static $personaStates = [
+    protected static array $personaStates = [
         'Offline',
         'Online',
         'Busy',
@@ -67,35 +58,35 @@ class SteamUser extends Fluent
      *
      * @var string
      */
-    protected $method = 'xml';
+    protected string $method = 'xml';
 
     /**
      * URL to use when retrieving a user's profile.
      *
      * @var string
      */
-    protected $profileDataUrl;
+    protected string $profileDataUrl;
 
     /**
      * xPaw instance.
      *
      * @var \SteamID
      */
-    protected $xPawSteamId;
+    protected SteamID $xPawSteamId;
 
     /**
      * Guzzle instance.
      *
      * @var \GuzzleHttp\Client
      */
-    protected $guzzle;
+    protected GuzzleClient $guzzle;
 
     /**
      * Guzzle response.
      *
      * @var \GuzzleHttp\Psr7\Response
      */
-    protected $response;
+    protected Response $response;
 
     /**
      * SteamUser constructor. Extends SteamID and constructs that first.
@@ -172,7 +163,38 @@ class SteamUser extends Fluent
         $this->attributes = array_merge($this->attributes, $data);
     }
 
-    protected static function parseApiProfileData($body) : array
+    
+    public static function userInfoBulk(array $steamIds) : void
+    {
+        /* Initialize new GuzzleClient */
+        $guzzle = new GuzzleClient();
+
+        /* Chunk the provided steamUsers, maximum of 100 */
+        $chunks = array_chunk($steamIds, 100);
+
+        foreach ($chunks as $chunk) {
+            $url = sprintf(self::STEAM_PLAYER_API, config('steam-login.api_key'), implode(',', $chunk));
+            $response = $guzzle->get($url);
+        }
+    }
+
+    /**
+     * Return Guzzle response of retrieving player's profile data.
+     *
+     * @return Response
+     */
+    public function getResponse() : Response
+    {
+        return $this->response;
+    }
+
+    /**
+     * Parse API response data.
+     *
+     * @param string $body
+     * @return array
+     */
+    protected static function parseApiProfileData(string $body) : array
     {
         $json = @json_decode($body, true);
         $json = isset($json['response']['players'][0]) ? $json['response']['players'][0] : null;
@@ -200,7 +222,13 @@ class SteamUser extends Fluent
         ];
     }
 
-    protected static function parseXmlProfileData($body) : array
+    /**
+     * Parse XML response data
+     *
+     * @param string $body
+     * @return array
+     */
+    protected static function parseXmlProfileData(string $body) : array
     {
         $xml = simplexml_load_string($body, 'SimpleXMLElement', LIBXML_NOCDATA);
 
@@ -225,15 +253,5 @@ class SteamUser extends Fluent
             'avatarLarge'     => (string) $xml->avatarFull,
             'avatar'          => (string) $xml->avatarFull,
         ];
-    }
-
-    /**
-     * Return Guzzle response of retrieving player's profile data.
-     *
-     * @return Response
-     */
-    public function getResponse() : Response
-    {
-        return $this->response;
     }
 }
