@@ -199,7 +199,7 @@ class SteamUser extends Fluent
             'privacyState'    => $json['communityvisibilitystate'] === 3 ? 'Public' : 'Private',
             'visibilityState' => $json['communityvisibilitystate'],
             'isOnline'        => !in_array($json['personastate'], [0, 4]),
-            'onlineState'     => isset($data['gameid']) ? 'In-Game' : (!in_array($json['personastate'], [0, 4]) ? 'Online' : 'Offline'),
+            'onlineState'     => isset($json['gameid']) ? 'In-Game' : (!in_array($json['personastate'], [0, 4]) ? 'Online' : 'Offline'),
             'joined'          => $json['timecreated'] ?? null,
             'avatarIcon'      => $json['avatar'],
             'avatarSmall'     => $json['avatar'],
