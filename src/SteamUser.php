@@ -94,7 +94,7 @@ class SteamUser extends Fluent
      * @param string|int        $steamId
      * @param GuzzleClient|null $guzzle
      */
-    public function __construct($steamId, GuzzleClient $guzzle = null)
+    public function __construct($steamId, GuzzleClient $guzzle = null, $data = [])
     {
         if (PHP_INT_SIZE !== 8) {
             trigger_error('64 bit PHP is required to handle SteamID conversions', E_USER_ERROR);
@@ -116,6 +116,11 @@ class SteamUser extends Fluent
         $this->guzzle = $guzzle ?? new GuzzleClient();
         $this->method = config('steam-login.method', 'xml') === 'api' ? 'api' : 'xml';
         $this->profileDataUrl = $this->method === 'xml' ? $this->attributes['profileDataUrl'] : sprintf(self::STEAM_PLAYER_API, config('steam-login.api_key'), $this->attributes['steamId']);
+
+        /* Support for pre populating, i.e. from bulk processing. */
+        if (count($data)) {
+            $this->attributes = array_merge($this->attributes, $data);
+        }
     }
 
     /**
@@ -131,7 +136,7 @@ class SteamUser extends Fluent
     /**
      * Retrieve a user's steam info set its attributes.
      *
-     * @return $this
+     * @return SteamUser
      */
     public function getUserInfo() : self
     {
@@ -142,6 +147,9 @@ class SteamUser extends Fluent
 
     /**
      * Retrieve a user's profile info from Steam via API or XML data.
+     * Profile info is available from attributes of this instance.
+     * 
+     * @return void
      */
     private function userInfo() : void
     {
@@ -163,8 +171,13 @@ class SteamUser extends Fluent
         $this->attributes = array_merge($this->attributes, $data);
     }
 
-    
-    public static function userInfoBulk(array $steamIds) : void
+    /**
+     * Same as userInfo but for bulk, use with raw steamId's.
+     *
+     * @param array $steamIds
+     * @return SteamUser[]
+     */
+    public static function userInfoBulk(array $steamIds) : array
     {
         /* Initialize new GuzzleClient */
         $guzzle = new GuzzleClient();
@@ -172,24 +185,36 @@ class SteamUser extends Fluent
         /* Chunk the provided steamUsers, maximum of 100 */
         $chunks = array_chunk($steamIds, 100);
 
+        /* Initialize an empty result array */
+        $players = [];
+
+        /* Process each steamIds chunk respecting API limits */
         foreach ($chunks as $chunk) {
+            /* Determine the url, append chunk of steam IDs for bulk */
             $url = sprintf(self::STEAM_PLAYER_API, config('steam-login.api_key'), implode(',', $chunk));
+
+            /* Get the response body */
             $response = $guzzle->get($url);
+
+            /* Try to decode the body */
+            $body = @json_decode($response->getBody()->getContents(), true);
+
+            /* Check if the reuslt is well formed */
+            if (json_last_error() === JSON_ERROR_NONE && isset($body['response']['players']) && is_array($body['response']['players']) && count($body['response']['players'])) {
+                /* Interate all fetched players */
+                foreach ($body['response']['players'] as $player) {
+                    /* Add player to the result list */
+                    $data = self::parseApiProfilePlayer($player);
+                    $players[] = new SteamUser($player['steamid'], null, $data);
+                }
+            }
         }
+
+        return $players;
     }
 
     /**
-     * Return Guzzle response of retrieving player's profile data.
-     *
-     * @return Response
-     */
-    public function getResponse() : Response
-    {
-        return $this->response;
-    }
-
-    /**
-     * Parse API response data.
+     * Parse a single api request.
      *
      * @param string $body
      * @return array
@@ -203,27 +228,37 @@ class SteamUser extends Fluent
             return [];
         }
 
+        return self::parseApiProfilePlayer($json);
+    }
+
+    /**
+     * Helper to reformat API player results.
+     *
+     * @param array $player
+     * @return array
+     */
+    protected static function parseApiProfilePlayer(array $player) : array {
         return [
-            'name'            => $json['personaname'],
-            'realName'        => $json['realname'] ?? null,
-            'profileUrl'      => $json['profileurl'],
-            'isPublic'        => $json['communityvisibilitystate'] === 3,
-            'privacyState'    => $json['communityvisibilitystate'] === 3 ? 'Public' : 'Private',
-            'visibilityState' => $json['communityvisibilitystate'],
-            'isOnline'        => !in_array($json['personastate'], [0, 4]),
-            'onlineState'     => isset($json['gameid']) ? 'In-Game' : (!in_array($json['personastate'], [0, 4]) ? 'Online' : 'Offline'),
-            'joined'          => $json['timecreated'] ?? null,
-            'avatarIcon'      => $json['avatar'],
-            'avatarSmall'     => $json['avatar'],
-            'avatarMedium'    => $json['avatarmedium'],
-            'avatarFull'      => $json['avatarfull'],
-            'avatarLarge'     => $json['avatarfull'],
-            'avatar'          => $json['avatarfull'],
+            'name'            => $player['personaname'],
+            'realName'        => $player['realname'] ?? null,
+            'profileUrl'      => $player['profileurl'],
+            'isPublic'        => $player['communityvisibilitystate'] === 3,
+            'privacyState'    => $player['communityvisibilitystate'] === 3 ? 'Public' : 'Private',
+            'visibilityState' => $player['communityvisibilitystate'],
+            'isOnline'        => !in_array($player['personastate'], [0, 4]),
+            'onlineState'     => isset($player['gameid']) ? 'In-Game' : (!in_array($player['personastate'], [0, 4]) ? 'Online' : 'Offline'),
+            'joined'          => $player['timecreated'] ?? null,
+            'avatarIcon'      => $player['avatar'],
+            'avatarSmall'     => $player['avatar'],
+            'avatarMedium'    => $player['avatarmedium'],
+            'avatarFull'      => $player['avatarfull'],
+            'avatarLarge'     => $player['avatarfull'],
+            'avatar'          => $player['avatarfull'],
         ];
     }
 
     /**
-     * Parse XML response data
+     * Parse API XML response.
      *
      * @param string $body
      * @return array
@@ -253,5 +288,15 @@ class SteamUser extends Fluent
             'avatarLarge'     => (string) $xml->avatarFull,
             'avatar'          => (string) $xml->avatarFull,
         ];
+    }
+
+    /**
+     * Return Guzzle response of retrieving player's profile data.
+     *
+     * @return Response
+     */
+    public function getResponse() : Response
+    {
+        return $this->response;
     }
 }
