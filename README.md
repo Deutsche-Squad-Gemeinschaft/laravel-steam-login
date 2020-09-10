@@ -3,10 +3,10 @@
 [![Packagist](https://img.shields.io/packagist/dt/skyraptor/laravel-steam-login.svg?style=flat-square&maxAge=3600)](https://packagist.org/packages/skyraptor/laravel-steam-login)
 [![Packagist version](https://img.shields.io/packagist/v/skyraptor/laravel-steam-login.svg?style=flat-square)](https://packagist.org/packages/skyraptor/laravel-steam-login)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/skyraptor/laravel-steam-login.svg?style=flat-square)](https://packagist.org/packages/skyraptor/laravel-steam-login)
-[![GitHub stars](https://img.shields.io/github/stars/skyraptor/laravel-steam-login.svg?style=flat-square)](https://github.com/skyraptor/laravel-steam-login/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/skyraptor/laravel-steam-login.svg?style=flat-square)](https://github.com/skyraptor/laravel-steam-login/network)
-[![GitHub issues](https://img.shields.io/github/issues/skyraptor/laravel-steam-login.svg?style=flat-square)](https://github.com/skyraptor/laravel-steam-login/issues)
-[![GitHub license](https://img.shields.io/github/license/skyraptor/laravel-steam-login.svg?style=flat-square)](https://github.com/skyraptor/laravel-steam-login/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/Deutsche-Squad-Gemeinschaft/laravel-steam-login.svg?style=flat-square)](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Deutsche-Squad-Gemeinschaft/laravel-steam-login.svg?style=flat-square)](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/network)
+[![GitHub issues](https://img.shields.io/github/issues/Deutsche-Squad-Gemeinschaft/laravel-steam-login.svg?style=flat-square)](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/issues)
+[![GitHub license](https://img.shields.io/github/license/Deutsche-Squad-Gemeinschaft/laravel-steam-login.svg?style=flat-square)](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/blob/master/LICENSE)
 
 Make sure you have made/performed your migrations along with updating your `User` model if you plan to follow the examples. I suggest doing whatever works best for you, but certain suggestions should be followed.
 
