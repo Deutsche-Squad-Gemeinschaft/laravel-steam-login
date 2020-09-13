@@ -1,12 +1,10 @@
 # Laravel Steam Login
 
-[![Packagist](https://img.shields.io/packagist/dt/skyraptor/laravel-steam-login.svg?style=flat-square&maxAge=3600)](https://packagist.org/packages/skyraptor/laravel-steam-login)
-[![Packagist version](https://img.shields.io/packagist/v/skyraptor/laravel-steam-login.svg?style=flat-square)](https://packagist.org/packages/skyraptor/laravel-steam-login)
-[![PHP from Packagist](https://img.shields.io/packagist/php-v/skyraptor/laravel-steam-login.svg?style=flat-square)](https://packagist.org/packages/skyraptor/laravel-steam-login)
-[![GitHub stars](https://img.shields.io/github/stars/Deutsche-Squad-Gemeinschaft/laravel-steam-login.svg?style=flat-square)](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Deutsche-Squad-Gemeinschaft/laravel-steam-login.svg?style=flat-square)](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/network)
-[![GitHub issues](https://img.shields.io/github/issues/Deutsche-Squad-Gemeinschaft/laravel-steam-login.svg?style=flat-square)](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/issues)
-[![GitHub license](https://img.shields.io/github/license/Deutsche-Squad-Gemeinschaft/laravel-steam-login.svg?style=flat-square)](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/blob/master/LICENSE)
+[![StyleCI](https://styleci.io/repos/240756053/shield?branch=master)](https://styleci.io/repos/240756053)
+[![Total Downloads](https://poser.pugx.org/skyraptor/laravel-steam-login/downloads.png)](https://packagist.org/packages/skyraptor/laravel-steam-login)
+[![Latest Stable Version](https://poser.pugx.org/skyraptor/laravel-steam-login/v/stable)](https://packagist.org/packages/skyraptor/laravel-steam-login)
+[![Latest Unstable Version](https://poser.pugx.org/skyraptor/laravel-steam-login/v/unstable)](https://packagist.org/packages/skyraptor/laravel-steam-login)
+[![License](https://poser.pugx.org/skyraptor/laravel-steam-login/license)](https://packagist.org/packages/skyraptor/laravel-steam-login)
 
 **A light package to provide easy authentication with the Steam API to your Laravel project.**
 
