@@ -1,4 +1,4 @@
-# Steam Auth/Login for Laravel 6.0+
+# Laravel Steam Login
 
 [![Packagist](https://img.shields.io/packagist/dt/skyraptor/laravel-steam-login.svg?style=flat-square&maxAge=3600)](https://packagist.org/packages/skyraptor/laravel-steam-login)
 [![Packagist version](https://img.shields.io/packagist/v/skyraptor/laravel-steam-login.svg?style=flat-square)](https://packagist.org/packages/skyraptor/laravel-steam-login)
@@ -8,19 +8,14 @@
 [![GitHub issues](https://img.shields.io/github/issues/Deutsche-Squad-Gemeinschaft/laravel-steam-login.svg?style=flat-square)](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/issues)
 [![GitHub license](https://img.shields.io/github/license/Deutsche-Squad-Gemeinschaft/laravel-steam-login.svg?style=flat-square)](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/blob/master/LICENSE)
 
-Make sure you have made/performed your migrations along with updating your `User` model if you plan to follow the examples. I suggest doing whatever works best for you, but certain suggestions should be followed.
-
-| Version | Laravel Version | Docs |
-| ------- | --------------- | ---- |
-| 1.x     | >5.6            | [Docs](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/wiki/1.x) |
-| 2.x     | 5.6+            | [Docs](https://github.com/Deutsche-Squad-Gemeinschaft/laravel-steam-login/wiki/2.x) |
+**A light package to provide easy authentication with the Steam API to your Laravel project.**
 
 ## Features
   - Redirect users to the page they were on before logging in
   - `SteamUser`class to easily retrieve a player's data
   - Included controller and routes for easy setup
 
-## Quick Setup (2.x, Laravel 5.6+)
+## Installation
 
 1. Install library
 ```
