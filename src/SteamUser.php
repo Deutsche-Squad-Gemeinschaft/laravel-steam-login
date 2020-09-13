@@ -2,9 +2,9 @@
 
 namespace skyraptor\LaravelSteamLogin;
 
-use Illuminate\Support\Fluent;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Fluent;
 use SteamID;
 
 /**
@@ -128,7 +128,7 @@ class SteamUser extends Fluent
      *
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->toJson();
     }
@@ -138,7 +138,7 @@ class SteamUser extends Fluent
      *
      * @return SteamUser
      */
-    public function getUserInfo() : self
+    public function getUserInfo(): self
     {
         $this->userInfo();
 
@@ -148,10 +148,10 @@ class SteamUser extends Fluent
     /**
      * Retrieve a user's profile info from Steam via API or XML data.
      * Profile info is available from attributes of this instance.
-     * 
+     *
      * @return void
      */
-    private function userInfo() : void
+    private function userInfo(): void
     {
         $this->response = $this->guzzle->get($this->profileDataUrl, ['connect_timeout' => config('steam-login.timeout')]);
         $body = $this->response->getBody()->getContents();
@@ -175,9 +175,10 @@ class SteamUser extends Fluent
      * Same as userInfo but for bulk, use with raw steamId's.
      *
      * @param array $steamIds
+     *
      * @return SteamUser[]
      */
-    public static function userInfoBulk(array $steamIds) : array
+    public static function userInfoBulk(array $steamIds): array
     {
         /* Initialize new GuzzleClient */
         $guzzle = new GuzzleClient();
@@ -217,9 +218,10 @@ class SteamUser extends Fluent
      * Parse a single api request.
      *
      * @param string $body
+     *
      * @return array
      */
-    protected static function parseApiProfileData(string $body) : array
+    protected static function parseApiProfileData(string $body): array
     {
         $json = @json_decode($body, true);
         $json = isset($json['response']['players'][0]) ? $json['response']['players'][0] : null;
@@ -235,9 +237,11 @@ class SteamUser extends Fluent
      * Helper to reformat API player results.
      *
      * @param array $player
+     *
      * @return array
      */
-    protected static function parseApiProfilePlayer(array $player) : array {
+    protected static function parseApiProfilePlayer(array $player): array
+    {
         return [
             'name'            => $player['personaname'],
             'realName'        => $player['realname'] ?? null,
@@ -261,9 +265,10 @@ class SteamUser extends Fluent
      * Parse API XML response.
      *
      * @param string $body
+     *
      * @return array
      */
-    protected static function parseXmlProfileData(string $body) : array
+    protected static function parseXmlProfileData(string $body): array
     {
         $xml = simplexml_load_string($body, 'SimpleXMLElement', LIBXML_NOCDATA);
 
@@ -295,7 +300,7 @@ class SteamUser extends Fluent
      *
      * @return Response
      */
-    public function getResponse() : Response
+    public function getResponse(): Response
     {
         return $this->response;
     }

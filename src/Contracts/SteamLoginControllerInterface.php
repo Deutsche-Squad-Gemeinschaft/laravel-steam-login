@@ -35,7 +35,7 @@ interface SteamLoginControllerInterface
     /**
      * Called when the request is successfully authenticated.
      *
-     * @param \Illuminate\Http\Request                   $request
+     * @param \Illuminate\Http\Request               $request
      * @param \skyraptor\LaravelSteamLogin\SteamUser $steamUser
      *
      * @return mixed|void

@@ -38,7 +38,7 @@ abstract class AbstractSteamLoginController extends Controller implements SteamL
     /**
      * AbstractSteamLoginController constructor.
      *
-     * @param \Illuminate\Http\Request                    $request
+     * @param \Illuminate\Http\Request                $request
      * @param \skyraptor\LaravelSteamLogin\SteamLogin $steam
      */
     public function __construct(Request $request, SteamLogin $steam)
