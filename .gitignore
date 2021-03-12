@@ -4,4 +4,4 @@
 
 # Composer
 composer.lock
-/vendor/
+vendor/

@@ -151,7 +151,7 @@ class SteamUser extends Fluent
      *
      * @return void
      */
-    private function userInfo(): void
+    protected function userInfo() : void
     {
         $this->response = $this->guzzle->get($this->profileDataUrl, ['connect_timeout' => config('steam-login.timeout')]);
         $body = $this->response->getBody()->getContents();
