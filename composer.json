@@ -25,7 +25,7 @@
         "ext-json": "*",
         "ext-libxml": "*",
         "ext-simplexml": "*",
-        "xpaw/steamid": "dev-master",
+        "xpaw/steamid": "^2.0.0",
         "guzzlehttp/guzzle": "^6.5.5|^7.0.1"
     },
     "autoload": {
